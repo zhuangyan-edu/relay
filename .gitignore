@@ -18,3 +18,8 @@ tmp/
 .env
 .env.local
 *.secret
+
+# Python runtime cache
+__pycache__/
+*.py[cod]
+.pytest_cache/

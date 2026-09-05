@@ -1,7 +1,7 @@
 # 全机 AI 智能体与系统提示词台账 (AI Agents & System Prompts Registry)
 
-> **中枢职责**：客观登记本机各 AI 编程助手系统提示词现状。  
-> **核心原则**：统一采用原词两行标准底线，零多余解释，零负向粉象。  
+> **分发模板**：此文件在新安装中保持为空，不包含客户端名称、配置路径或提示词内容。
+> **维护机制**：由用户按需登记实际客户端；敏感配置、令牌和完整系统提示词不得写入此台账。
 > **存放路径**：`~/.agents/custodian/ai-agents.md`
 
 ---
@@ -10,18 +10,13 @@
 
 | 序号 | AI 客户端代号 | 系统提示词物理寻址 | 提示词内容 | 状态 |
 | :---: | :--- | :--- | :--- | :---: |
-| **1** | **WorkBuddy** | `~/.workbuddy/SOUL.md`<br>`~/.workbuddy/IDENTITY.md` | 原生 38 行 K2 人设 + 2 行统一底线 | 正常 |
-| **2** | **OpenAI Codex** | `~/.codex/AGENTS.md` | 2 行统一底线 | 正常 |
-| **3** | **Claude Code** | `~/.claude/CLAUDE.md` | 2 行统一底线 | 正常 |
-| **4** | **GitHub Copilot** | `~/.copilot/copilot-instructions.md` | 2 行统一底线 | 正常 |
-| **5** | **Antigravity** | `~/.gemini/config/AGENTS.md`<br>`~/.agents/AGENTS.md` | 2 行统一底线 | 正常 |
-| **6** | **OpenCode** | `~/.config/opencode/` | 配置文件管理 | 正常 |
+<!-- 新安装不预填客户端。登记时只写必要的寻址和状态信息。 -->
 
 ---
 
-## 2. 最终落地的 2 行统一底线 (The Two Lines)
+## 2. 可选的统一底线参考 (Optional Shared Baseline)
 
 ```markdown
-- **核心思想**：客观求真、实效权衡、两端取优、纯正向聚焦（详见 [PHILOSOPHY.md](file:///C:/Users/Administrator/.agents/PHILOSOPHY.md)）。
+- **核心思想**：客观求真、实效权衡、两端取优、纯正向聚焦（详见 [PHILOSOPHY.md](~/.agents/PHILOSOPHY.md)）。
 - **接力心智**：面向跨 AI 异步团队交付持久化、可运行的代码与文档。
 ```
