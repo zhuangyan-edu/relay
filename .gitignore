@@ -1,0 +1,20 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node / Dependencies
+node_modules/
+dist/
+build/
+*.log
+
+# Scratch
+scratch/
+tmp/
+*.tmp
+
+# Environment & Secrets
+.env
+.env.local
+*.secret
