@@ -1,6 +1,6 @@
 # 跨 AI 通用自进化 Agent 架构设计蓝图 (Universal Agent Architecture Blueprint)
 
-> **版本**：v3.6 核心思想校准与双中枢定型版  
+> **版本**：v1.0.0 (内测中)  
 > **设计基调**：**全域受益 · 实效权衡 · 两端取优 · 客观求真 · 纯正向聚焦 · 融贯自洽**  
 > **核心突破**：  
 > 1. **全域双台账中枢 (`~/.agents/custodian/`)**：`projects.md` 统管代码工程资产，`ai-agents.md` 统管全机 AI 客户端及其提示词规范；

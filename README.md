@@ -3,7 +3,7 @@
 > **The Minimalist, Zero-Overhead, Self-Evolving Agent Framework for Relay Coding.**  
 > 面向跨 AI（Claude / Cursor / Gemini / Codex / GPT）异步接力与自进化的极简敏捷工程套件。
 
-> `Version: 3.6.0` · `License: MIT` · `AI-Native: Claude | Cursor | Gemini | Codex | WorkBuddy` · `Philosophy: Affirmative & Lossless`
+> `Version: 1.0.0 (内测中)` · `License: MIT` · `AI-Native: Claude | Cursor | Gemini | Codex | WorkBuddy` · `Philosophy: Affirmative & Lossless`
 
 ---
 
