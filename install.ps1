@@ -61,6 +61,7 @@ Add-ManifestFile (Join-Path $scriptDir "relay.py") "relay.py"
 Add-ManifestFile (Join-Path $scriptDir "PHILOSOPHY.md") "PHILOSOPHY.md"
 Add-ManifestFile (Join-Path $scriptDir "custodian\projects.md") "custodian\projects.md"
 Add-ManifestFile (Join-Path $scriptDir "custodian\ai-agents.md") "custodian\ai-agents.md"
+Add-ManifestFile (Join-Path $scriptDir "custodian\cd-weekly-log.md") "custodian\cd-weekly-log.md"
 
 foreach ($assetRoot in @("skills", "templates")) {
     $root = Join-Path $scriptDir $assetRoot

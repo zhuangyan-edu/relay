@@ -78,6 +78,7 @@ required_files=(
     "PHILOSOPHY.md"
     "custodian/projects.md"
     "custodian/ai-agents.md"
+    "custodian/cd-weekly-log.md"
 )
 for relative in "${required_files[@]}"; do
     if [[ ! -f "$SCRIPT_DIR/$relative" ]]; then

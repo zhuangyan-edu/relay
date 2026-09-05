@@ -49,7 +49,6 @@ def files_for(profile: str) -> list[tuple[Path, Path]]:
         common += [
             (TEMPLATE_ROOT / "ARCHITECTURE.md", Path("ARCHITECTURE.md")),
             (TEMPLATE_ROOT / "CONTEXT.md", Path("CONTEXT.md")),
-            (TEMPLATE_ROOT / ".agents" / "cd-weekly-log.md", Path(".agents/cd-weekly-log.md")),
             (TEMPLATE_ROOT / ".agents" / "proper-nouns.md", Path(".agents/proper-nouns.md")),
             (TEMPLATE_ROOT / ".agents" / "cloud-archive.md", Path(".agents/cloud-archive.md")),
         ]
@@ -68,7 +67,11 @@ def files_for(profile: str) -> list[tuple[Path, Path]]:
 def package_files() -> list[Path]:
     """Return all files required for a source-package integrity check."""
     required = [REPO_ROOT / "VERSION", REPO_ROOT / "PHILOSOPHY.md", REPO_ROOT / "relay.py"]
-    required += [REPO_ROOT / "custodian" / "projects.md", REPO_ROOT / "custodian" / "ai-agents.md"]
+    required += [
+        REPO_ROOT / "custodian" / "projects.md",
+        REPO_ROOT / "custodian" / "ai-agents.md",
+        REPO_ROOT / "custodian" / "cd-weekly-log.md",
+    ]
     for directory in (REPO_ROOT / "skills", REPO_ROOT / "templates"):
         required.extend(item for item in directory.rglob("*") if item.is_file())
     return required
@@ -117,7 +120,7 @@ def update_registry(project: Path, profile: str, dry_run: bool) -> Path:
     record = {
         "path": str(project),
         "profile": profile,
-        "ledger": str(project / ".agents" / "cd-weekly-log.md"),
+        "ledger": str(home_agents() / "custodian" / "cd-weekly-log.md"),
         "updated_at": now(),
         "status": "active",
     }

@@ -1,6 +1,6 @@
 ---
 name: skill-weekly-custodian
-description: 项目每周自检与资产保洁中枢。以 .agents/cd-weekly-log.md 为确定性审计线索，执行沉淀防腐核验、同类经验聚类、沙盒清理与移云提请，滚动清算台账并输出零通胀报告。
+description: 项目每周自检与资产保洁中枢。以 ~/.agents/custodian/cd-weekly-log.md 为确定性审计线索，执行沉淀防腐核验、同类经验聚类、沙盒清理与移云提请，滚动清算台账并输出零通胀报告。
 argument-hint: "[audit|clean|roll]"
 disable-model-invocation: true
 ---
@@ -19,8 +19,9 @@ disable-model-invocation: true
 * **调度支持**：可由用户自行配置 Cron/任务计划程序调用 `relay.py sweep`；仓库不安装后台任务，也不在无授权时创建系统调度。
 * **全局周巡检中枢工作区**：**`~/.agents/custodian/`**
   - **项目注册表**：`~/.agents/custodian/projects.json`（CLI 的机器可读权威记录）；`projects.md` 作为人工阅读索引；
+  - **全机周总账**：**`~/.agents/custodian/cd-weekly-log.md`**（汇集全机各项目本周待审流水的唯一中央台账）；
   - **周报归档库**：`~/.agents/custodian/reports/`（存放跨项目汇总的历次全局周检周报）。
-* **核心输入源**：各项目的周报沉淀台账（如各项目下的 `.agents/cd-weekly-log.md`）。
+* **核心输入源**：全机统一周期沉淀总账 `~/.agents/custodian/cd-weekly-log.md`。
 
 ---
 
@@ -28,8 +29,10 @@ disable-model-invocation: true
 
 ### 模式 A：单项目就地周检 (Local Project Mode)
 当在某个具体项目工作区中唤起 `/zj` 时：
-1. 定点读取当前项目的 `.agents/cd-weekly-log.md` 执行四步审计闭环；
-2. 刷新 `~/.agents/custodian/projects.json` 中当前项目的巡检时间与状态。
+1. **就地保洁**：扫描当前项目 `scratch/` 临时草稿，提请清理废弃文件；
+2. **大资产移云**：提请将已完结的大文件迁出网盘，并在 `.agents/cloud-archive.md` 留指针；
+3. **资产完整性体检**：执行 `relay.py audit .` 快速核验当前项目必要顶层资产；
+4. **刷新状态**：更新 `~/.agents/custodian/projects.json` 中当前项目的巡检时间与状态。
 
 ### 模式 B：全局中枢周检 (Global Cross-Project Mode)
 > 💡 **工作区要求**：执行全机跨项目全局总巡检时，**必须在 IDE（Cursor / VSCode / Claude）中将 `~/.agents/` 打开为独立工作区**！只有在此工作区下，AI 才具备全机总管视角与跨项目穿透审计权限。
@@ -37,27 +40,28 @@ disable-model-invocation: true
 当在全局中枢工作区发出“全局周检 / 跨项目巡检”时，依序执行五步闭环：
 
 #### 步骤一：项目发现与穿透寻址 (Project Discovery)
-读取 `~/.agents/custodian/projects.json`，获取所有装载了 Relay 的项目清单与周报路径。若当前所在项目尚未登记，先通过 `relay.py init` 登记。
-*容错机制*：若某项目路径在磁盘上已不存在（已删除、改名或迁移），在台账中将状态标记为【路径失效/待核实】，安全跳过，绝不中断巡检流程。
+读取 `~/.agents/custodian/projects.json`，获取全机所有登记项目清单与活跃状态。若某项目路径已不存在，标记为【路径失效/待核实】安全跳过。
 
-#### 步骤二：逐项目定点审计台账 (Ledger-Driven Audit)
-穿透到各个装载项目的台账（如 `项目/.agents/cd-weekly-log.md`）：
-1. **防腐化核验**：跳转至落盘目标文件，核查是否存在终端完整报错或长篇输出；若有，当场脱水为【现象 - 根因 - 最小解法/单行命令】；
-2. **正向语言核验**：核查新增内容是否保持纯正向陈述，消除防御性免责或反向辩白；
-3. *若台账无待审条目*：直接推进至常规保洁，保持零通胀。
+#### 步骤二：定点审计全机周总账 (Central Ledger Audit)
+打开全机唯一总账 **`~/.agents/custodian/cd-weekly-log.md`** 的【本周全机待审流水】表格：
+1. **逐行核查物理落盘**：依据表格中的【项目物理路径】与【物理落盘位置】，跳转至目标文件核验：
+   - 是否真正落实到位；
+   - 是否保持极简脱水（无控制台大段日志污染）；
+   - 是否严格遵循正向陈述（无反向免责）；
+2. *若本周全机待审流水为空*：直接推进至常规物理保洁，保持零通胀。
 
 #### 步骤三：同类经验聚类与技能兼并 (Coalescence & Generalization)
-1. **暗坑聚类**：扫描本周期多条同源、同模块的微小笔记，主动将其归纳合并为一条通用的系统级防坑准则；
-2. **技能兼并**：检查是否存在职责高度重叠的“薄技能”，提请整合精简，降低认知负载。
+1. **跨项目暗坑聚类**：在全局流水表中横向比对，若发现不同项目攻克了同源、同模块的技术暗坑，主动提炼为全机通用的系统级防坑准则；
+2. **全局技能晋升提请**：若某项目沉淀的本地领域技能（`.agents/skills/`）对全机其他工程具有普适价值，主动提请晋升至全局 `~/.agents/skills/`。
 
 #### 步骤四：仓库物理保洁与纪元索引维护 (Physical Housekeeping & Epoch Indexing)
-1. **沙盒清理**：扫描 `scratch/` 目录，对于超过 7 天无修改且无外部引用的临时文件，提请清除；
-2. **完结大资产云归档提请**：扫描代码库中已完结的大体积历史资产（如答辩 PPT、视频、大型静态结果集），提请打包迁移至外部云端存储（如 Google Drive / OneDrive / NAS 等），并在 `.agents/cloud-archive.md`（或既有 `gdrive-cloud-archive.md`）中保留单行检索指针；
-3. **长文档沉淀与清晰索引维护 (Epoch Indexing)**：当开发日志或计划文档超长需要沉淀归档时，**严禁粗暴截断**；必须在活跃文档头部固化维护【历代里程碑归档全景索引表】，登记纪元时间段、核心产物、检索词与云端指针，确保历史脉络一目了然。
+1. **沙盒清理**：扫描各项目 `scratch/` 目录，清理过期草稿；
+2. **完结大资产云归档提请**：扫描代码库中已完结的大体积历史资产，提请打包迁移至外部网盘/NAS，并在本地 `.agents/cloud-archive.md` 保留单行检索指针；
+3. **长文档纪元索引维护**：超长文档迁出归档时，必须在活跃文档头部维护【历史纪元归档索引表】，严禁粗暴截断。
 
-#### 步骤五：台账滚动清算与零通胀汇报 (Ledger Roll & Zero-Inflation Reporting)
-1. **各项目台账清算**：将各项目已审计条目标记为 `[已归档]`，滚动重置活跃区；
-2. **全局周报沉淀**：执行 `relay.py sweep` 生成 `~/.agents/custodian/reports/YYYY-Wxx.md` 跨项目汇总报告，并更新 `projects.json` 中各项目的巡检时间与健康状态；
+#### 步骤五：全局台账清算与零通胀汇报 (Ledger Roll & Zero-Inflation Reporting)
+1. **全局总账清算**：将 `~/.agents/custodian/cd-weekly-log.md` 中已审计通过的条目清算并归入 `~/.agents/custodian/reports/YYYY-Wxx.md`，重置全局活跃区；
+2. **运行确定性扫盘**：调用 `relay.py sweep` 更新各项目最新健康状态；
 3. **零通胀汇报**：
    * **全库健康时（极简直报事实）**：
      > `[周检完成] 本周期所有装载项目台账已全部验真合规，已生成 ~/.agents/custodian/reports/2026-Wxx.md。`
